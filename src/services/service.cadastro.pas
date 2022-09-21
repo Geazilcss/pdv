@@ -50,10 +50,21 @@ type
     QRY_abreCaixaABR_CODIGOUSUARIO: TIntegerField;
     QRY_abreCaixaABR_STATUS: TStringField;
     QRY_abreCaixaABR_OBSERVACAO: TStringField;
+    QRY_produto: TFDQuery;
+    QRY_produtoPR1_NOMECOMPLETO: TStringField;
+    QRY_produtoPR1_CODIGOBARRA: TStringField;
+    QRY_produtoPR2_VENDAVISTA: TFMTBCDField;
+    QRY_produtoPR2_VENDAPRAZO: TFMTBCDField;
   private
     { Private declarations }
   public
-    { Public declarations }
+
+
+  procedure GET_produtos(AValue: string);
+
+
+
+
   end;
 
 var
@@ -64,5 +75,14 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+{ TServiceCadastro }
+
+procedure TServiceCadastro.GET_produtos(AValue: string);
+begin
+  QRY_produto.Close;
+  QRY_produto.Params[0].AsString := AValue;
+  QRY_produto.Open();
+end;
 
 end.

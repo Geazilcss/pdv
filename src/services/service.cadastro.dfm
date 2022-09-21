@@ -100,4 +100,56 @@ inherited ServiceCadastro: TServiceCadastro
       Size = 200
     end
   end
+  object QRY_produto: TFDQuery
+    Connection = FDConn
+    SQL.Strings = (
+      'select'
+      ' p1.pr1_nomecompleto,'
+      ' p1.pr1_codigobarra,'
+      ' p2.pr2_vendavista,'
+      ' p2.pr2_vendaprazo'
+      'from produto1 p1'
+      ' join produto2 p2 on (p2.pr2_codigopr1 = p1.pr1_codigo)'
+      'where p1.pr1_codigobarra = :codBarra')
+    Left = 328
+    Top = 208
+    ParamData = <
+      item
+        Name = 'CODBARRA'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 50
+        Value = Null
+      end>
+    object QRY_produtoPR1_NOMECOMPLETO: TStringField
+      FieldName = 'PR1_NOMECOMPLETO'
+      Origin = 'PR1_NOMECOMPLETO'
+      Size = 100
+    end
+    object QRY_produtoPR1_CODIGOBARRA: TStringField
+      FieldName = 'PR1_CODIGOBARRA'
+      Origin = 'PR1_CODIGOBARRA'
+      Size = 50
+    end
+    object QRY_produtoPR2_VENDAVISTA: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'PR2_VENDAVISTA'
+      Origin = 'PR2_VENDAVISTA'
+      ProviderFlags = []
+      ReadOnly = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
+    object QRY_produtoPR2_VENDAPRAZO: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'PR2_VENDAPRAZO'
+      Origin = 'PR2_VENDAPRAZO'
+      ProviderFlags = []
+      ReadOnly = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
+  end
 end

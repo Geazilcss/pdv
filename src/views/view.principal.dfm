@@ -2557,6 +2557,7 @@ object ViewPrincipal: TViewPrincipal
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          OnExit = edtCodigoBarrasExit
         end
       end
       object pnlRodapeConsultaProduto: TPanel

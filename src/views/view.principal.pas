@@ -26,7 +26,7 @@ uses
   Winapi.Windows,
   view.abrirCaixa,
 
-  providers.functions;
+  providers.functions, service.cadastro;
 
 type
   TViewPrincipal = class(TForm)
@@ -74,6 +74,7 @@ type
     procedure imgLogoEmpresaAmarelaMouseLeave(Sender: TObject);
     procedure imgLogoEmpresaAmarelaClick(Sender: TObject);
     procedure lblAbreCaixaClick(Sender: TObject);
+    procedure edtCodigoBarrasExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -86,6 +87,12 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TViewPrincipal.edtCodigoBarrasExit(Sender: TObject);
+begin
+  ServiceCadastro.GET_produtos(edtCodigoBarras.Text);
+  ShowMessage(ServiceCadastro.QRY_produtoPR1_NOMECOMPLETO.AsString);
+end;
 
 procedure TViewPrincipal.imgLogoEmpresaAmarelaClick(Sender: TObject);
 begin
