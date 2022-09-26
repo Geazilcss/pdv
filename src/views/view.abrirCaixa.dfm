@@ -5,7 +5,6 @@ inherited ViewAbrirCaixa: TViewAbrirCaixa
   inherited pnlTopo: TPanel
     inherited lblTitulo: TLabel
       Width = 95
-      Height = 34
       Caption = 'Abrir Caixa'
       ExplicitWidth = 95
     end
@@ -16,9 +15,6 @@ inherited ViewAbrirCaixa: TViewAbrirCaixa
         inherited pnlFiltroPesquisa: TPanel
           inherited pnlFiltro: TPanel
             ExplicitTop = 0
-            inherited lblPesquisa: TLabel
-              Height = 42
-            end
           end
         end
         inherited DBG_listas: TDBGrid
@@ -88,11 +84,6 @@ inherited ViewAbrirCaixa: TViewAbrirCaixa
           Font.Name = 'Segoe UI Semibold'
           Font.Style = [fsBold]
           ParentFont = False
-        end
-        inherited pnlFiltroCadastro: TPanel
-          inherited lblTituloCadastro: TLabel
-            Height = 42
-          end
         end
         object edtVlrInicial: TDBEdit
           Left = 39

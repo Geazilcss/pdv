@@ -4,8 +4,6 @@ inherited ViewBaseListas: TViewBaseListas
   ClientHeight = 550
   ClientWidth = 900
   Position = poOwnerFormCenter
-  OnCreate = FormCreate
-  OnDestroy = FormDestroy
   OnShow = FormShow
   ExplicitWidth = 900
   ExplicitHeight = 550
@@ -16,11 +14,13 @@ inherited ViewBaseListas: TViewBaseListas
     Top = 0
     Width = 900
     Height = 36
+    Cursor = crHandPoint
     Align = alTop
     BevelOuter = bvNone
     Color = 5395026
     ParentBackground = False
     TabOrder = 0
+    OnMouseDown = lblTituloMouseDown
     object lblTitulo: TLabel
       AlignWithMargins = True
       Left = 41
@@ -40,7 +40,8 @@ inherited ViewBaseListas: TViewBaseListas
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
-      ExplicitHeight = 28
+      OnMouseDown = lblTituloMouseDown
+      ExplicitLeft = 44
     end
     object pnlImgLogo: TPanel
       Left = 0
@@ -112,11 +113,10 @@ inherited ViewBaseListas: TViewBaseListas
           5432333A31333A34352B30303A3030819BD18C0000002574455874646174653A
           6D6F6469667900323032322D30392D30395432333A31333A34352B30303A3030
           F0C669300000000049454E44AE426082}
+        OnMouseDown = lblTituloMouseDown
         OnMouseEnter = imgLogoAzulMouseEnter
-        ExplicitLeft = 40
-        ExplicitTop = -32
-        ExplicitWidth = 105
-        ExplicitHeight = 105
+        ExplicitLeft = -3
+        ExplicitTop = -3
       end
     end
     object pnlFechar: TPanel
@@ -323,7 +323,6 @@ inherited ViewBaseListas: TViewBaseListas
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
-            ExplicitTop = -3
             object lblPesquisa: TLabel
               AlignWithMargins = True
               Left = 3
@@ -412,7 +411,6 @@ inherited ViewBaseListas: TViewBaseListas
             Font.Name = 'Segoe UI Semibold'
             Font.Style = [fsBold]
             ParentFont = False
-            ExplicitTop = 20
             ExplicitHeight = 25
           end
         end

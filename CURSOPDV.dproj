@@ -139,6 +139,10 @@
         </DCCReference>
         <DCCReference Include="src\providers\providers.functions.pas"/>
         <DCCReference Include="src\providers\providers.variaveis.pas"/>
+        <DCCReference Include="src\views\view.telaFundo.pas">
+            <Form>ViewTelaFundo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

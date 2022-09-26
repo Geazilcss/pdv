@@ -2127,7 +2127,10 @@ object ViewPrincipal: TViewPrincipal
     FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
     FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
     FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+  KeyPreview = True
   OldCreateOrder = True
+  OnKeyPress = FormKeyPress
+  OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 15
   object pnlTopo: TPanel
@@ -2593,6 +2596,25 @@ object ViewPrincipal: TViewPrincipal
           ParentFont = False
           ExplicitHeight = 30
         end
+        object edtSubTotal: TEdit
+          Left = 128
+          Top = 20
+          Width = 161
+          Height = 33
+          Alignment = taRightJustify
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          BorderStyle = bsNone
+          Color = 7434609
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -27
+          Font.Name = 'Segoe UI Semibold'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+          Text = '0'
+        end
       end
       object pnlNomeProduto: TPanel
         Left = 0
@@ -2646,9 +2668,9 @@ object ViewPrincipal: TViewPrincipal
           object lblQTD: TLabel
             Left = 5
             Top = 4
-            Width = 32
+            Width = 72
             Height = 25
-            Caption = 'Qtd'
+            Caption = 'Qtd ( + )'
             Font.Charset = ANSI_CHARSET
             Font.Color = 5395026
             Font.Height = -19
@@ -2683,6 +2705,7 @@ object ViewPrincipal: TViewPrincipal
             ParentFont = False
             TabOrder = 0
             Text = '1'
+            OnExit = edtQTDExit
           end
           object edtVlrUnitario: TEdit
             Left = 91
@@ -2779,6 +2802,11 @@ object ViewPrincipal: TViewPrincipal
         Margins.Right = 10
         Align = alClient
         BorderStyle = bsNone
+        DataSource = dsItens
+        DrawingStyle = gdsGradient
+        FixedColor = 5395026
+        GradientEndColor = 5395026
+        GradientStartColor = 5395026
         Font.Charset = ANSI_CHARSET
         Font.Color = 5460819
         Font.Height = -13
@@ -2788,29 +2816,90 @@ object ViewPrincipal: TViewPrincipal
         ParentFont = False
         TabOrder = 0
         TitleFont.Charset = ANSI_CHARSET
-        TitleFont.Color = 5395026
+        TitleFont.Color = clWhite
         TitleFont.Height = -16
         TitleFont.Name = 'Segoe UI Semilight'
         TitleFont.Style = []
+        OnDrawColumnCell = DBG_produtosDrawColumnCell
         Columns = <
           item
             Expanded = False
-            Title.Caption = 'Codigo'
+            FieldName = 'cod_item'
+            Title.Caption = 'C'#243'digo'
             Visible = True
           end
           item
             Expanded = False
+            FieldName = 'nome_produto'
             Title.Caption = 'Produto'
-            Width = 333
+            Width = 250
             Visible = True
           end
           item
             Expanded = False
-            Title.Caption = 'Quantidade'
-            Width = 115
+            FieldName = 'qtd_produto'
+            Title.Caption = 'QTD'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'vlr_unitario'
+            Title.Caption = 'Vlr. Unit'
+            Width = 86
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'vlr_desconto'
+            Title.Caption = 'Vlr. Desc'
+            Width = 87
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'vlr_total'
+            Title.Caption = 'Sub. Total'
             Visible = True
           end>
       end
     end
+  end
+  object TBL_itens: TFDMemTable
+    AfterPost = TBL_itensAfterPost
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 544
+    Top = 232
+    object TBL_itenscod_item: TIntegerField
+      FieldName = 'cod_item'
+    end
+    object TBL_itensqtd_produto: TCurrencyField
+      FieldName = 'qtd_produto'
+      currency = False
+    end
+    object TBL_itensvlr_unitario: TCurrencyField
+      FieldName = 'vlr_unitario'
+    end
+    object TBL_itensvlr_desconto: TCurrencyField
+      FieldName = 'vlr_desconto'
+    end
+    object TBL_itensvlr_total: TCurrencyField
+      FieldName = 'vlr_total'
+    end
+    object TBL_itensnome_produto: TStringField
+      FieldName = 'nome_produto'
+      Size = 100
+    end
+  end
+  object dsItens: TDataSource
+    DataSet = TBL_itens
+    OnDataChange = dsItensDataChange
+    Left = 552
+    Top = 296
   end
 end

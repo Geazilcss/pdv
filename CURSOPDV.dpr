@@ -10,7 +10,8 @@ uses
   view.base.listas in 'src\views\view.base.listas.pas' {ViewBaseListas},
   view.abrirCaixa in 'src\views\view.abrirCaixa.pas' {ViewAbrirCaixa},
   providers.functions in 'src\providers\providers.functions.pas',
-  providers.variaveis in 'src\providers\providers.variaveis.pas';
+  providers.variaveis in 'src\providers\providers.variaveis.pas',
+  view.telaFundo in 'src\views\view.telaFundo.pas' {ViewTelaFundo};
 
 {$R *.res}
 
@@ -18,6 +19,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TViewPrincipal, ViewPrincipal);
-  Application.CreateForm(TServiceConexao, ServiceConexao);
+  Application.CreateForm(TViewTelaFundo, ViewTelaFundo);
   Application.Run;
 end.

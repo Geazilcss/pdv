@@ -76,8 +76,8 @@ begin // show
   inherited;
   dsPadrao.DataSet := FService.QRY_abreCaixa;
 
-  FService.QRY_abreCaixa.Close;
-  FService.QRY_abreCaixa.Open();
+//  FService.QRY_abreCaixa.Close;
+//  FService.QRY_abreCaixa.Open();
 
 end;
 

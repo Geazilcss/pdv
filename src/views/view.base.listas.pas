@@ -28,9 +28,8 @@ uses
   Winapi.Messages,
   Winapi.Windows,
 
-  view.base,
+  view.base;
 
-  service.cadastro;  // responsavel por fazer tudo no banco.
 
 type
   TViewBaseListas = class(TViewBase)
@@ -67,19 +66,16 @@ type
     procedure FormShow(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure dsPadraoStateChange(Sender: TObject);
+    procedure lblTituloMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
 
-  published
-    FService: TServiceCadastro;
-
   public
-    { Public declarations }
+
+
   end;
 
 var
@@ -138,18 +134,6 @@ begin //botoes do sistema
 
 end;
 
-procedure TViewBaseListas.FormCreate(Sender: TObject);
-begin // create
-  inherited;
-  FService := TServiceCadastro.Create(Self);
-end;
-
-procedure TViewBaseListas.FormDestroy(Sender: TObject);
-begin // destroy
-  inherited;
-  FreeAndNil(FService);
-end;
-
 procedure TViewBaseListas.FormShow(Sender: TObject);
 begin // show
   inherited;
@@ -168,6 +152,15 @@ begin
   inherited;
   imgLogoAzul.Visible  := True;
   imgLogoCinza.Visible := False;
+end;
+
+procedure TViewBaseListas.lblTituloMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+const
+   sc_DragMove = $f012;
+begin  // mover o formulario sem bordas
+  inherited;
+  ReleaseCapture;
+  Perform(wm_SysCommand, sc_DragMove, 0);
 end;
 
 end.

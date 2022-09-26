@@ -9,7 +9,7 @@ inherited ServiceConexao: TServiceConexao
       'Password=masterkey'
       'Protocol=TCPIP'
       'Port=3025'
-      'Server=localhost'
+      'Server=127.0.0.1'
       'CharacterSet=win1252'
       'DriverID=FB')
     LoginPrompt = False

@@ -1,6 +1,6 @@
 inherited ServiceCadastro: TServiceCadastro
   Height = 445
-  Width = 682
+  Width = 923
   inherited FDConn: TFDConnection
     Connected = True
   end
@@ -49,7 +49,7 @@ inherited ServiceCadastro: TServiceCadastro
     Connection = FDConn
     SQL.Strings = (
       'select * from abrecaixa where abr_status = '#39'ABERTO'#39)
-    Left = 184
+    Left = 168
     Top = 104
     object QRY_abreCaixaABR_CODIGO: TIntegerField
       AutoGenerateValue = arAutoInc
@@ -104,6 +104,7 @@ inherited ServiceCadastro: TServiceCadastro
     Connection = FDConn
     SQL.Strings = (
       'select'
+      ' p1.pr1_codigo,'
       ' p1.pr1_nomecompleto,'
       ' p1.pr1_codigobarra,'
       ' p2.pr2_vendavista,'
@@ -111,8 +112,8 @@ inherited ServiceCadastro: TServiceCadastro
       'from produto1 p1'
       ' join produto2 p2 on (p2.pr2_codigopr1 = p1.pr1_codigo)'
       'where p1.pr1_codigobarra = :codBarra')
-    Left = 328
-    Top = 208
+    Left = 176
+    Top = 168
     ParamData = <
       item
         Name = 'CODBARRA'
@@ -147,6 +148,121 @@ inherited ServiceCadastro: TServiceCadastro
       Origin = 'PR2_VENDAPRAZO'
       ProviderFlags = []
       ReadOnly = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
+    object QRY_produtoPR1_CODIGO: TIntegerField
+      FieldName = 'PR1_CODIGO'
+      Origin = 'PR1_CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+  end
+  object QRY_venda: TFDQuery
+    Connection = FDConn
+    SQL.Strings = (
+      'select * from movestoque where mov_codigo = :codigo')
+    Left = 576
+    Top = 56
+    ParamData = <
+      item
+        Name = 'CODIGO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object QRY_vendaMOV_CODIGO: TIntegerField
+      FieldName = 'MOV_CODIGO'
+      Origin = 'MOV_CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object QRY_vendaMOV_TIPOESTOQUE: TIntegerField
+      FieldName = 'MOV_TIPOESTOQUE'
+      Origin = 'MOV_TIPOESTOQUE'
+    end
+    object QRY_vendaMOV_DATA: TDateField
+      FieldName = 'MOV_DATA'
+      Origin = 'MOV_DATA'
+    end
+    object QRY_vendaMOV_HORA: TTimeField
+      FieldName = 'MOV_HORA'
+      Origin = 'MOV_HORA'
+    end
+    object QRY_vendaMOV_VLRDESCONTO: TFMTBCDField
+      FieldName = 'MOV_VLRDESCONTO'
+      Origin = 'MOV_VLRDESCONTO'
+      currency = True
+      Precision = 18
+      Size = 2
+    end
+    object QRY_vendaMOV_VLRTOTAL: TFMTBCDField
+      FieldName = 'MOV_VLRTOTAL'
+      Origin = 'MOV_VLRTOTAL'
+      currency = True
+      Precision = 18
+      Size = 2
+    end
+    object QRY_vendaMOV_VENDEDOR: TIntegerField
+      FieldName = 'MOV_VENDEDOR'
+      Origin = 'MOV_VENDEDOR'
+    end
+    object QRY_vendaMOV_CLIENTE: TIntegerField
+      FieldName = 'MOV_CLIENTE'
+      Origin = 'MOV_CLIENTE'
+    end
+  end
+  object QRY_vendaItem: TFDQuery
+    Connection = FDConn
+    SQL.Strings = (
+      'select * from movestoque_item where mvi_codigo = :codigo')
+    Left = 576
+    Top = 112
+    ParamData = <
+      item
+        Name = 'CODIGO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object QRY_vendaItemMVI_CODIGO: TIntegerField
+      FieldName = 'MVI_CODIGO'
+      Origin = 'MVI_CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object QRY_vendaItemMVI_CODIGOMOVESTOQUE: TIntegerField
+      FieldName = 'MVI_CODIGOMOVESTOQUE'
+      Origin = 'MVI_CODIGOMOVESTOQUE'
+    end
+    object QRY_vendaItemMVI_CODITEM: TIntegerField
+      FieldName = 'MVI_CODITEM'
+      Origin = 'MVI_CODITEM'
+    end
+    object QRY_vendaItemMVI_QUANTIDADE: TFMTBCDField
+      FieldName = 'MVI_QUANTIDADE'
+      Origin = 'MVI_QUANTIDADE'
+      Precision = 18
+      Size = 2
+    end
+    object QRY_vendaItemMVI_VLRUNITARIO: TFMTBCDField
+      FieldName = 'MVI_VLRUNITARIO'
+      Origin = 'MVI_VLRUNITARIO'
+      currency = True
+      Precision = 18
+      Size = 2
+    end
+    object QRY_vendaItemMVI_VLRTOTAL: TFMTBCDField
+      FieldName = 'MVI_VLRTOTAL'
+      Origin = 'MVI_VLRTOTAL'
+      currency = True
+      Precision = 18
+      Size = 2
+    end
+    object QRY_vendaItemMVI_VLRDESCONTO: TFMTBCDField
+      FieldName = 'MVI_VLRDESCONTO'
+      Origin = 'MVI_VLRDESCONTO'
       currency = True
       Precision = 18
       Size = 2

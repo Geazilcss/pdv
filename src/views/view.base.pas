@@ -12,13 +12,21 @@ uses
   Vcl.Forms,
   Vcl.Graphics,
 
+  service.cadastro,  // responsavel por fazer tudo no banco.
+
   Winapi.Messages,
   Winapi.Windows;
 
 type
   TViewBase = class(TForm)
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
-    { Private declarations }
+
+  published
+    FService: TServiceCadastro;
+
   public
     { Public declarations }
   end;
@@ -29,5 +37,21 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TViewBase.FormCreate(Sender: TObject);
+begin // create
+  FService := TServiceCadastro.Create(Self);
+end;
+
+procedure TViewBase.FormDestroy(Sender: TObject);
+begin // destroy
+  FreeAndNil(FService);
+end;
+
+procedure TViewBase.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if key = VK_RETURN then
+    Perform(Wm_NextDlgCtl,0,0);
+end;
 
 end.
