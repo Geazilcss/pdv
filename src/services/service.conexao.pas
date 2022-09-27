@@ -82,6 +82,8 @@ begin
     FDConn.Params.Values['Server']    := LServidor;
     FDConn.Params.Values['Porta']     := LPorta.ToString;
 
+    FDConn.Connected := True;
+
   finally
     FreeAndNil(LIniFile);
   end;

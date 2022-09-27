@@ -11,10 +11,13 @@ inherited ViewAbrirCaixa: TViewAbrirCaixa
   end
   inherited pnlLinhaFundo: TPanel
     inherited CardPanel_conteudo: TCardPanel
+      ActiveCard = card_pesquisa
       inherited card_pesquisa: TCard
         inherited pnlFiltroPesquisa: TPanel
           inherited pnlFiltro: TPanel
-            ExplicitTop = 0
+            inherited lblPesquisa: TLabel
+              Height = 42
+            end
           end
         end
         inherited DBG_listas: TDBGrid
@@ -57,6 +60,7 @@ inherited ViewAbrirCaixa: TViewAbrirCaixa
         end
       end
       inherited card_cadastro: TCard
+        ExplicitTop = -3
         object lblVlrInicial: TLabel [0]
           Left = 39
           Top = 96

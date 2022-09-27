@@ -2449,8 +2449,8 @@ object ViewPrincipal: TViewPrincipal
     ParentBackground = False
     TabOrder = 2
     object lblAbreCaixa: TLabel
-      Left = 21
-      Top = 12
+      Left = 20
+      Top = 14
       Width = 58
       Height = 15
       Cursor = crHandPoint
@@ -2462,6 +2462,21 @@ object ViewPrincipal: TViewPrincipal
       Font.Style = []
       ParentFont = False
       OnClick = lblAbreCaixaClick
+    end
+    object lblFaturar: TLabel
+      Left = 132
+      Top = 14
+      Width = 40
+      Height = 15
+      Cursor = crHandPoint
+      Caption = 'Faturar '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      OnClick = lblFaturarClick
     end
   end
   object pnlBackground: TPanel
@@ -2901,5 +2916,10 @@ object ViewPrincipal: TViewPrincipal
     OnDataChange = dsItensDataChange
     Left = 552
     Top = 296
+  end
+  object Timer_hora: TTimer
+    OnTimer = Timer_horaTimer
+    Left = 556
+    Top = 352
   end
 end

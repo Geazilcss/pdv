@@ -21,6 +21,7 @@ inherited ViewBaseListas: TViewBaseListas
     ParentBackground = False
     TabOrder = 0
     OnMouseDown = lblTituloMouseDown
+    ExplicitTop = -3
     object lblTitulo: TLabel
       AlignWithMargins = True
       Left = 41
@@ -41,7 +42,7 @@ inherited ViewBaseListas: TViewBaseListas
       Font.Style = []
       ParentFont = False
       OnMouseDown = lblTituloMouseDown
-      ExplicitLeft = 44
+      ExplicitHeight = 28
     end
     object pnlImgLogo: TPanel
       Left = 0

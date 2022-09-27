@@ -5,6 +5,16 @@ interface
 uses
   Data.DB,
 
+  FireDAC.Comp.Client,
+  FireDAC.Comp.DataSet,
+  FireDAC.DApt.Intf,
+  FireDAC.DatS,
+  FireDAC.Phys.Intf,
+  FireDAC.Stan.Error,
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+
   System.Classes,
   System.SysUtils,
   System.Variants,
@@ -28,8 +38,7 @@ uses
   providers.functions,
 
   view.abrirCaixa,
-  view.base, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  view.base, view.formapgto;
 
 type
   TViewPrincipal = class(TViewBase)
@@ -82,6 +91,8 @@ type
     TBL_itensnome_produto: TStringField;
     dsItens: TDataSource;
     edtSubTotal: TEdit;
+    Timer_hora: TTimer;
+    lblFaturar: TLabel;
     procedure imgLogoEmpresaBrancaMouseEnter(Sender: TObject);
     procedure imgLogoEmpresaAmarelaMouseLeave(Sender: TObject);
     procedure imgLogoEmpresaAmarelaClick(Sender: TObject);
@@ -93,6 +104,8 @@ type
     procedure TBL_itensAfterPost(DataSet: TDataSet);
     procedure DBG_produtosDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure dsItensDataChange(Sender: TObject; Field: TField);
+    procedure Timer_horaTimer(Sender: TObject);
+    procedure lblFaturarClick(Sender: TObject);
   private
 
     var
@@ -119,14 +132,14 @@ begin  // deixando a cor branca
 //  TDBGrid(Sender).DefaultDrawColumnCell(Rect,DataCol,Column,State);
 end;
 
-procedure TViewPrincipal.dsItensDataChange(Sender: TObject; Field: TField);
-begin
+procedure TViewPrincipal.FormResize(Sender: TObject);
+begin // Resize
   inherited;
-  FService.DimensionarGrid( DBG_produtos );  //nao foi mostrado no video
+  FService.DimensionarGrid( DBG_produtos );
 end;
 
-procedure TViewPrincipal.FormResize(Sender: TObject);
-begin
+procedure TViewPrincipal.dsItensDataChange(Sender: TObject; Field: TField);
+begin // DataChange
   inherited;
   FService.DimensionarGrid( DBG_produtos );
 end;
@@ -212,7 +225,14 @@ end;
 
 procedure TViewPrincipal.lblAbreCaixaClick(Sender: TObject);
 begin // abrir caixa
+  inherited;
   CriaForm(TViewAbrirCaixa, ViewAbrirCaixa);
+end;
+
+procedure TViewPrincipal.lblFaturarClick(Sender: TObject);
+begin // faturamento
+  inherited;
+  CriaForm(TViewFormaPGTO, ViewFormaPGTO);
 end;
 
 procedure TViewPrincipal.TBL_itensAfterPost(DataSet: TDataSet);
@@ -235,6 +255,12 @@ begin // somando
 
   edtTotalAPagar.Text := FloatToStr(TOTAL_VENDA);
 
+end;
+
+procedure TViewPrincipal.Timer_horaTimer(Sender: TObject);
+begin
+  inherited;
+  lblHora.Caption := TimeToStr(Time);
 end;
 
 end.

@@ -3,7 +3,7 @@ object ViewTelaFundo: TViewTelaFundo
   Top = 0
   Align = alClient
   AlphaBlend = True
-  AlphaBlendValue = 150
+  AlphaBlendValue = 100
   BorderStyle = bsNone
   Caption = 'ViewTelaFundo'
   ClientHeight = 486

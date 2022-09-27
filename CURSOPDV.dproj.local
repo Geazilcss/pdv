@@ -1,19 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2022/09/01 19:27:50.000.561,C:\Users\Jesuelkler Goveia\Documents\Embarcadero\Studio\Projects\Unit1.dfm=E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\views\view.principal.dfm</Transaction>
-    <Transaction>2022/09/01 19:28:16.000.144,C:\Users\Jesuelkler Goveia\Documents\Embarcadero\Studio\Projects\Project1.dproj=E:\Programação\DelphiXE_Básico\git_PDV_Curso\CURSOPDV.dproj</Transaction>
-    <Transaction>2022/09/08 19:49:15.000.217,E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\services\service.base.pas=E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.pas</Transaction>
-    <Transaction>2022/09/08 19:49:15.000.217,E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\services\service.base.dfm=E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.dfm</Transaction>
-    <Transaction>2022/09/08 19:52:03.000.276,E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\services\service.conexao.pas=E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.pas</Transaction>
-    <Transaction>2022/09/08 19:52:03.000.276,E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\services\service.conexao.dfm=E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.dfm</Transaction>
-    <Transaction>2022/09/08 20:00:29.000.968,E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\services\service.cadastro.pas=E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.pas</Transaction>
-    <Transaction>2022/09/08 20:00:29.000.968,E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\services\service.cadastro.dfm=E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.dfm</Transaction>
-    <Transaction>2022/09/09 20:00:09.000.820,E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.dfm=E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\views\view.base.dfm</Transaction>
-    <Transaction>2022/09/09 20:04:04.000.749,E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.dfm=E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\views\view.base.listas.dfm</Transaction>
-    <Transaction>2022/09/15 19:39:02.000.976,F:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.dfm=F:\Programação\DelphiXE_Básico\git_PDV_Curso\src\views\view.abreCaixa.dfm</Transaction>
-    <Transaction>2022/09/15 20:00:30.000.816,F:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.dfm=F:\Programação\DelphiXE_Básico\git_PDV_Curso\src\views\view.abrirCaixa.dfm</Transaction>
-    <Transaction>2022/09/26 19:44:26.101,F:\Programação\DelphiXE_Básico\git_PDV_Curso\trunk\src\views\view.telaFundo.dfm=F:\Programação\DelphiXE_Básico\git_PDV_Curso\trunk\Unit1.dfm</Transaction>
+    <Transaction>2022/09/01 19:27:50.000.561,E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\views\view.principal.dfm=C:\Users\Jesuelkler Goveia\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2022/09/01 19:28:16.000.144,E:\Programação\DelphiXE_Básico\git_PDV_Curso\CURSOPDV.dproj=C:\Users\Jesuelkler Goveia\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2022/09/08 19:49:15.000.217,E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.pas=E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\services\service.base.pas</Transaction>
+    <Transaction>2022/09/08 19:49:15.000.217,E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.dfm=E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\services\service.base.dfm</Transaction>
+    <Transaction>2022/09/08 19:52:03.000.276,E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.pas=E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\services\service.conexao.pas</Transaction>
+    <Transaction>2022/09/08 19:52:03.000.276,E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.dfm=E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\services\service.conexao.dfm</Transaction>
+    <Transaction>2022/09/08 20:00:29.000.968,E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.pas=E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\services\service.cadastro.pas</Transaction>
+    <Transaction>2022/09/08 20:00:29.000.968,E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.dfm=E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\services\service.cadastro.dfm</Transaction>
+    <Transaction>2022/09/09 20:00:09.000.820,E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\views\view.base.dfm=E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.dfm</Transaction>
+    <Transaction>2022/09/09 20:04:04.000.749,E:\Programação\DelphiXE_Básico\git_PDV_Curso\src\views\view.base.listas.dfm=E:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.dfm</Transaction>
+    <Transaction>2022/09/15 19:39:02.000.976,F:\Programação\DelphiXE_Básico\git_PDV_Curso\src\views\view.abreCaixa.dfm=F:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.dfm</Transaction>
+    <Transaction>2022/09/15 20:00:30.000.816,F:\Programação\DelphiXE_Básico\git_PDV_Curso\src\views\view.abrirCaixa.dfm=F:\Programação\DelphiXE_Básico\git_PDV_Curso\Unit1.dfm</Transaction>
+    <Transaction>2022/09/26 19:44:26.000.101,F:\Programação\DelphiXE_Básico\git_PDV_Curso\trunk\Unit1.dfm=F:\Programação\DelphiXE_Básico\git_PDV_Curso\trunk\src\views\view.telaFundo.dfm</Transaction>
+    <Transaction>2022/09/27 19:30:23.090,F:\Programação\DelphiXE_Básico\git_PDV_Curso\trunk\src\views\view.formapgto.dfm=F:\Programação\DelphiXE_Básico\git_PDV_Curso\trunk\Unit1.dfm</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile iOSSimulator="iPhone5"/>

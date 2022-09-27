@@ -268,4 +268,27 @@ inherited ServiceCadastro: TServiceCadastro
       Size = 2
     end
   end
+  object QRY_formasPGTO: TFDQuery
+    Connection = FDConn
+    SQL.Strings = (
+      'select * from formaspagamentos order by for_codigo')
+    Left = 576
+    Top = 192
+    object QRY_formasPGTOFOR_CODIGO: TIntegerField
+      FieldName = 'FOR_CODIGO'
+      Origin = 'FOR_CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object QRY_formasPGTOFOR_DESCRICAO: TStringField
+      FieldName = 'FOR_DESCRICAO'
+      Origin = 'FOR_DESCRICAO'
+      Size = 100
+    end
+    object QRY_formasPGTOFOR_GERARECEBER: TStringField
+      FieldName = 'FOR_GERARECEBER'
+      Origin = 'FOR_GERARECEBER'
+      Size = 10
+    end
+  end
 end

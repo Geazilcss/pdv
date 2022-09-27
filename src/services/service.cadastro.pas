@@ -76,6 +76,10 @@ type
     QRY_vendaItemMVI_VLRTOTAL: TFMTBCDField;
     QRY_vendaItemMVI_VLRDESCONTO: TFMTBCDField;
     QRY_produtoPR1_CODIGO: TIntegerField;
+    QRY_formasPGTO: TFDQuery;
+    QRY_formasPGTOFOR_CODIGO: TIntegerField;
+    QRY_formasPGTOFOR_DESCRICAO: TStringField;
+    QRY_formasPGTOFOR_GERARECEBER: TStringField;
   private
 
 

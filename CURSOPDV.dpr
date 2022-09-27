@@ -11,7 +11,8 @@ uses
   view.abrirCaixa in 'src\views\view.abrirCaixa.pas' {ViewAbrirCaixa},
   providers.functions in 'src\providers\providers.functions.pas',
   providers.variaveis in 'src\providers\providers.variaveis.pas',
-  view.telaFundo in 'src\views\view.telaFundo.pas' {ViewTelaFundo};
+  view.telaFundo in 'src\views\view.telaFundo.pas' {ViewTelaFundo},
+  view.formapgto in 'src\views\view.formapgto.pas' {ViewFormaPGTO};
 
 {$R *.res}
 
