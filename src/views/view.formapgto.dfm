@@ -21,7 +21,6 @@ inherited ViewFormaPGTO: TViewFormaPGTO
     ParentBackground = False
     TabOrder = 0
     OnMouseDown = lblTituloMouseDown
-    ExplicitTop = -3
     object lblTitulo: TLabel
       AlignWithMargins = True
       Left = 41
@@ -409,6 +408,106 @@ inherited ViewFormaPGTO: TViewFormaPGTO
       TitleFont.Height = -16
       TitleFont.Name = 'Segoe UI Semilight'
       TitleFont.Style = []
+    end
+  end
+  object pnlValor: TPanel
+    Left = 333
+    Top = 149
+    Width = 297
+    Height = 145
+    BevelOuter = bvNone
+    Color = 9737364
+    ParentBackground = False
+    TabOrder = 5
+    Visible = False
+    object pnlTitValor: TPanel
+      Left = 0
+      Top = 0
+      Width = 297
+      Height = 33
+      Align = alTop
+      BevelOuter = bvNone
+      Color = 7566195
+      ParentBackground = False
+      TabOrder = 0
+      object lblTituloValor: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 0
+        Width = 291
+        Height = 33
+        Cursor = crHandPoint
+        Margins.Top = 0
+        Margins.Bottom = 0
+        Align = alClient
+        Alignment = taCenter
+        Caption = '[ VALOR PARA FATURAR ]'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -21
+        Font.Name = 'Segoe UI Semilight'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 228
+        ExplicitHeight = 30
+      end
+    end
+    object edtVlrFaturar: TEdit
+      AlignWithMargins = True
+      Left = 5
+      Top = 43
+      Width = 287
+      Height = 45
+      Margins.Left = 5
+      Margins.Top = 10
+      Margins.Right = 5
+      Margins.Bottom = 5
+      Align = alTop
+      Alignment = taRightJustify
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BorderStyle = bsNone
+      Color = 9737364
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -27
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      Text = '0.00'
+    end
+    object pnlBtnOk: TPanel
+      AlignWithMargins = True
+      Left = 216
+      Top = 104
+      Width = 73
+      Height = 33
+      Margins.Left = 50
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
+      BevelOuter = bvNone
+      Color = 45056
+      ParentBackground = False
+      TabOrder = 2
+      object btnOk: TSpeedButton
+        Left = 0
+        Top = 0
+        Width = 73
+        Height = 33
+        Cursor = crHandPoint
+        Align = alClient
+        Caption = 'Ok'
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Segoe UI Semibold'
+        Font.Style = []
+        ParentFont = False
+        ExplicitTop = -8
+      end
     end
   end
   object dsFormasPGTO: TDataSource

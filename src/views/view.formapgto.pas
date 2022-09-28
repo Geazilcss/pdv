@@ -49,13 +49,19 @@ type
     edtVlrFaturado: TEdit;
     edtVlrRestante: TEdit;
     dsFormasPGTO: TDataSource;
+    pnlValor: TPanel;
+    pnlTitValor: TPanel;
+    lblTituloValor: TLabel;
+    edtVlrFaturar: TEdit;
+    pnlBtnOk: TPanel;
+    btnOk: TSpeedButton;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure lblTituloMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
-    { Private declarations }
+    FValorVenda: double;
   public
-    { Public declarations }
+    property ValorVenda: double read FValorVenda write FValorVenda;
   end;
 
 var
@@ -74,10 +80,14 @@ end;
 procedure TViewFormaPGTO.FormShow(Sender: TObject);
 begin // show
   inherited;
+
   dsFormasPGTO.DataSet := FService.QRY_formasPGTO;
   FService.QRY_formasPGTO.Close;
   FService.QRY_formasPGTO.Open();
   DBG_formasPGTO.SetFocus;
+
+  edtVlrVenda.Text := FloatToStr(FValorVenda);
+
 end;
 
 procedure TViewFormaPGTO.lblTituloMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);

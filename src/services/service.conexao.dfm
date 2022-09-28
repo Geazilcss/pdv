@@ -17,6 +17,7 @@ inherited ServiceConexao: TServiceConexao
     Top = 40
   end
   object FBDriverLink: TFDPhysFBDriverLink
+    VendorLib = 'C:\Program Files\Firebird\Firebird_2_5\WOW64\fbclient.dll'
     Left = 64
     Top = 112
   end

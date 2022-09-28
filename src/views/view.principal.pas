@@ -232,6 +232,21 @@ end;
 procedure TViewPrincipal.lblFaturarClick(Sender: TObject);
 begin // faturamento
   inherited;
+
+  ViewFormaPGTO := TViewFormaPGTO.Create(Self);
+  try
+
+    ViewFormaPGTO.ValorVenda := StrToFloatDef(edtTotalAPagar.Text, 0);
+    ViewFormaPGTO.ShowModal;
+
+  finally
+    FreeAndNil(ViewFormaPGTO);
+  end;
+
+
+
+
+
   CriaForm(TViewFormaPGTO, ViewFormaPGTO);
 end;
 

@@ -5,6 +5,7 @@ inherited ViewAbrirCaixa: TViewAbrirCaixa
   inherited pnlTopo: TPanel
     inherited lblTitulo: TLabel
       Width = 95
+      Height = 34
       Caption = 'Abrir Caixa'
       ExplicitWidth = 95
     end
@@ -60,7 +61,6 @@ inherited ViewAbrirCaixa: TViewAbrirCaixa
         end
       end
       inherited card_cadastro: TCard
-        ExplicitTop = -3
         object lblVlrInicial: TLabel [0]
           Left = 39
           Top = 96

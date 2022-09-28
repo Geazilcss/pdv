@@ -65,7 +65,7 @@ begin
     FDConn.Connected := False;
 
     LCaminho := ExtractFileDir(ParamStr(0)) + '\Login.ini';
-    //    FDPhysFBDriverLink.VendorHome := ExtractFileDir(ParamStr(0)) + '\dlls';
+//    FBDriverLink.VendorHome := ExtractFileDir(ParamStr(0)) + '\dlls';
 
     LIniFile := TIniFile.Create(LCaminho);
 
