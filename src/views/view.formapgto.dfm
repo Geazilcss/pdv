@@ -353,6 +353,7 @@ inherited ViewFormaPGTO: TViewFormaPGTO
       TitleFont.Height = -16
       TitleFont.Name = 'Segoe UI Semilight'
       TitleFont.Style = []
+      OnDblClick = DBG_formasPGTODblClick
       Columns = <
         item
           Expanded = False
@@ -391,6 +392,7 @@ inherited ViewFormaPGTO: TViewFormaPGTO
       Margins.Bottom = 5
       Align = alClient
       BorderStyle = bsNone
+      DataSource = dsFormasPGTOEscolhidas
       DrawingStyle = gdsGradient
       FixedColor = 5395026
       GradientEndColor = 5395026
@@ -408,6 +410,21 @@ inherited ViewFormaPGTO: TViewFormaPGTO
       TitleFont.Height = -16
       TitleFont.Name = 'Segoe UI Semilight'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'VALOR_PGTO'
+          Title.Caption = 'Valor'
+          Width = 112
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOME_FORMAPGTO'
+          Title.Caption = 'Forma Pagamento'
+          Width = 500
+          Visible = True
+        end>
     end
   end
   object pnlValor: TPanel
@@ -506,6 +523,7 @@ inherited ViewFormaPGTO: TViewFormaPGTO
         Font.Name = 'Segoe UI Semibold'
         Font.Style = []
         ParentFont = False
+        OnClick = btnOkClick
         ExplicitTop = -8
       end
     end
@@ -513,5 +531,38 @@ inherited ViewFormaPGTO: TViewFormaPGTO
   object dsFormasPGTO: TDataSource
     Left = 96
     Top = 136
+  end
+  object TBL_formasPGTO: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 725
+    Top = 104
+    object TBL_formasPGTOID_FORMAPGTO: TIntegerField
+      FieldName = 'ID_FORMAPGTO'
+    end
+    object TBL_formasPGTOVALOR_PGTO: TCurrencyField
+      FieldName = 'VALOR_PGTO'
+    end
+    object TBL_formasPGTONOME_FORMAPGTO: TStringField
+      FieldName = 'NOME_FORMAPGTO'
+      Size = 100
+    end
+    object TBL_formasPGTOGERAR_RECEBER: TStringField
+      FieldName = 'GERAR_RECEBER'
+      Size = 1
+    end
+    object TBL_formasPGTOID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
+  end
+  object dsFormasPGTOEscolhidas: TDataSource
+    DataSet = TBL_formasPGTO
+    Left = 736
+    Top = 176
   end
 end

@@ -244,10 +244,6 @@ begin // faturamento
   end;
 
 
-
-
-
-  CriaForm(TViewFormaPGTO, ViewFormaPGTO);
 end;
 
 procedure TViewPrincipal.TBL_itensAfterPost(DataSet: TDataSet);
