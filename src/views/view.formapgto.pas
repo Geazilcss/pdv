@@ -5,6 +5,16 @@ interface
 uses
   Data.DB,
 
+  FireDAC.Comp.Client,
+  FireDAC.Comp.DataSet,
+  FireDAC.DApt.Intf,
+  FireDAC.DatS,
+  FireDAC.Phys.Intf,
+  FireDAC.Stan.Error,
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+
   System.Classes,
   System.SysUtils,
   System.Variants,
@@ -23,8 +33,7 @@ uses
   Winapi.Messages,
   Winapi.Windows,
 
-  view.base, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  view.base;
 
 type
   TViewFormaPGTO = class(TViewBase)
@@ -63,11 +72,19 @@ type
     TBL_formasPGTOGERAR_RECEBER: TStringField;
     TBL_formasPGTOID_CLIENTE: TIntegerField;
     dsFormasPGTOEscolhidas: TDataSource;
+    TBL_itensVenda: TFDMemTable;
+    TBL_itensVendacod_item: TIntegerField;
+    TBL_itensVendaqtd_produto: TCurrencyField;
+    TBL_itensVendavlr_unitario: TCurrencyField;
+    TBL_itensVendavlr_desconto: TCurrencyField;
+    TBL_itensVendavlr_total: TCurrencyField;
+    TBL_itensVendanome_produto: TStringField;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure lblTituloMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure DBG_formasPGTODblClick(Sender: TObject);
     procedure btnOkClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
   private
     FValorVenda: double;
   public
@@ -115,6 +132,51 @@ begin
   edtVlrFaturar.Clear;
   pnlValor.Visible := False;
   DBG_formasPGTO.SetFocus;
+
+end;
+
+procedure TViewFormaPGTO.btnSalvarClick(Sender: TObject);
+begin   //salvar
+  inherited;
+
+  //salvando a venda
+  FService.PUT_venda(TBL_itensVenda,1,1,1,FValorVenda,0);
+
+
+
+  TBL_formasPGTO.First;
+
+  while not TBL_formasPGTO.Eof do
+  begin
+
+    // gravando o caixa
+    FService.PUT_caixa('E', 'VENDA PDV N. ' + IntToStr(2) + ' - ' + TBL_formasPGTONOME_FORMAPGTO.AsString,
+                                 TBL_formasPGTOvalor_pgto.AsFloat,
+                                 TBL_formasPGTOid_formapgto.AsInteger,
+                                 2 );
+
+    // gravando o receber
+    if TBL_formasPGTOgerar_receber.AsString =  'S' then
+    begin
+
+//      PUT_receber(TBL_formasPGTOid_numdocto.AsString,
+//                  TBL_formasPGTOid_cliente.AsInteger,
+//                  TBL_formasPGTOvalor_pgto.AsFloat);
+
+    end;
+
+
+
+
+
+    TBL_formasPGTO.Next;
+
+  end;
+
+
+  ShowMessage('Dados salvos com sucesso.');
+
+  Self.Close;
 
 end;
 

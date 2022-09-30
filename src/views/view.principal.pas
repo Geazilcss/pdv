@@ -38,7 +38,7 @@ uses
   providers.functions,
 
   view.abrirCaixa,
-  view.base, view.formapgto;
+  view.base, view.formapgto, view.telaFundo;
 
 type
   TViewPrincipal = class(TViewBase)
@@ -237,9 +237,14 @@ begin // faturamento
   try
 
     ViewFormaPGTO.ValorVenda := StrToFloatDef(edtTotalAPagar.Text, 0);
+
+    ViewFormaPGTO.TBL_itensVenda.CopyDataSet(TBL_itens);
+
+    ViewTelaFundo.Show;
     ViewFormaPGTO.ShowModal;
 
   finally
+    ViewTelaFundo.Hide;
     FreeAndNil(ViewFormaPGTO);
   end;
 

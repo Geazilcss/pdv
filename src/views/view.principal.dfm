@@ -2888,8 +2888,8 @@ object ViewPrincipal: TViewPrincipal
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 544
-    Top = 232
+    Left = 736
+    Top = 240
     object TBL_itenscod_item: TIntegerField
       FieldName = 'cod_item'
     end
@@ -2914,12 +2914,12 @@ object ViewPrincipal: TViewPrincipal
   object dsItens: TDataSource
     DataSet = TBL_itens
     OnDataChange = dsItensDataChange
-    Left = 552
+    Left = 736
     Top = 296
   end
   object Timer_hora: TTimer
     OnTimer = Timer_horaTimer
-    Left = 556
-    Top = 352
+    Left = 428
+    Top = 320
   end
 end

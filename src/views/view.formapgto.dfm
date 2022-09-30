@@ -17,7 +17,7 @@ inherited ViewFormaPGTO: TViewFormaPGTO
     Cursor = crHandPoint
     Align = alTop
     BevelOuter = bvNone
-    Color = 5395026
+    Color = 10837778
     ParentBackground = False
     TabOrder = 0
     OnMouseDown = lblTituloMouseDown
@@ -182,6 +182,7 @@ inherited ViewFormaPGTO: TViewFormaPGTO
         Font.Name = 'Segoe UI Semibold'
         Font.Style = [fsBold]
         ParentFont = False
+        OnClick = btnSalvarClick
         ExplicitTop = 3
       end
     end
@@ -564,5 +565,36 @@ inherited ViewFormaPGTO: TViewFormaPGTO
     DataSet = TBL_formasPGTO
     Left = 736
     Top = 176
+  end
+  object TBL_itensVenda: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 728
+    Top = 264
+    object TBL_itensVendacod_item: TIntegerField
+      FieldName = 'cod_item'
+    end
+    object TBL_itensVendaqtd_produto: TCurrencyField
+      FieldName = 'qtd_produto'
+      currency = False
+    end
+    object TBL_itensVendavlr_unitario: TCurrencyField
+      FieldName = 'vlr_unitario'
+    end
+    object TBL_itensVendavlr_desconto: TCurrencyField
+      FieldName = 'vlr_desconto'
+    end
+    object TBL_itensVendavlr_total: TCurrencyField
+      FieldName = 'vlr_total'
+    end
+    object TBL_itensVendanome_produto: TStringField
+      FieldName = 'nome_produto'
+      Size = 100
+    end
   end
 end

@@ -80,12 +80,26 @@ type
     QRY_formasPGTOFOR_CODIGO: TIntegerField;
     QRY_formasPGTOFOR_DESCRICAO: TStringField;
     QRY_formasPGTOFOR_GERARECEBER: TStringField;
+    QRY_cadCaixa: TFDQuery;
+    QRY_cadCaixaCAI_CODIGO: TIntegerField;
+    QRY_cadCaixaCAI_DATAHORA: TSQLTimeStampField;
+    QRY_cadCaixaCAI_TIPO: TStringField;
+    QRY_cadCaixaCAI_VALOR: TFMTBCDField;
+    QRY_cadCaixaCAI_DESCRICAO: TStringField;
+    QRY_cadCaixaCAI_IDFORMAPGTO: TIntegerField;
+    QRY_cadCaixaCAI_IDVENDA: TIntegerField;
   private
 
 
   public
     procedure GET_produtos(AValue: string);
     procedure DimensionarGrid(dbg: TDBGrid);
+
+
+    procedure PUT_caixa(tipo, descricao: string; valor: double; idFormaPGTO, idVENDA: integer);
+
+    procedure PUT_venda(ADataSet: TDataSet; TipoEstoque, Vendedor, Cliente: integer;
+      ValorVenda, Desconto: double);
 
 
 
@@ -117,6 +131,60 @@ begin // produto pelo código de barras
 
 end;
 
+
+procedure TServiceCadastro.PUT_caixa(tipo, descricao: string; valor: double; idFormaPGTO, idVENDA: integer);
+begin   // gravando o caixa
+
+  QRY_cadCaixa.Close;
+  QRY_cadCaixa.Open();
+  QRY_cadCaixa.Insert;
+
+  QRY_cadCaixaCAI_DATAHORA.AsDateTime   := Now;
+  QRY_cadCaixaCAI_TIPO.AsString         := tipo;
+  QRY_cadCaixaCAI_VALOR.AsFloat         := valor;
+  QRY_cadCaixaCAI_DESCRICAO.AsString    := descricao;
+  QRY_cadCaixaCAI_IDFORMAPGTO.AsInteger := idFormaPGTO;
+  QRY_cadCaixaCAI_IDVENDA.AsInteger     := idVENDA;
+  QRY_cadCaixa.Post;
+
+end;
+
+procedure TServiceCadastro.PUT_venda(ADataSet: TDataSet; TipoEstoque, Vendedor, Cliente: integer;
+      ValorVenda, Desconto: double);
+begin // inserindo a venda
+
+  //salvando o cabeçalho da venda
+  QRY_venda.Close;
+  QRY_venda.Open();
+  QRY_venda.Insert;
+  QRY_vendaMOV_TIPOESTOQUE.AsInteger := 1;
+  QRY_vendaMOV_DATA.AsDateTime       := Date;
+  QRY_vendaMOV_HORA.AsDateTime       := Time;
+  QRY_vendaMOV_VLRDESCONTO.AsFloat   := Desconto;
+  QRY_vendaMOV_VLRTOTAL.AsFloat      := ValorVenda;
+  QRY_vendaMOV_VENDEDOR.AsInteger    := Vendedor;
+  QRY_vendaMOV_CLIENTE.AsInteger     := Cliente;
+  QRY_venda.Post;
+
+  ADataSet.First;
+  while not ADataSet.Eof do
+  begin
+
+    QRY_vendaItem.Close;
+    QRY_vendaItem.Open();
+    QRY_vendaItem.Insert;
+    QRY_vendaItemMVI_CODIGOMOVESTOQUE.AsInteger := QRY_vendaMOV_CODIGO.AsInteger;
+    QRY_vendaItemMVI_CODITEM.AsInteger          := ADataSet.FieldByName('cod_item').AsInteger;
+    QRY_vendaItemMVI_QUANTIDADE.AsFloat         := ADataSet.FieldByName('qtd_produto').AsFloat;
+    QRY_vendaItemMVI_VLRUNITARIO.AsFloat        := ADataSet.FieldByName('vlr_unitario').AsFloat;
+    QRY_vendaItemMVI_VLRTOTAL.AsFloat           := ADataSet.FieldByName('vlr_total').AsFloat;
+    QRY_vendaItemMVI_VLRDESCONTO.AsFloat        := ADataSet.FieldByName('vlr_desconto').AsFloat;
+    QRY_vendaItem.Post;
+
+    ADataSet.Next;
+  end;
+
+end;
 
 procedure TServiceCadastro.DimensionarGrid(dbg: TDBGrid);
 type

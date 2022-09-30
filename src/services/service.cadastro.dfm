@@ -1,9 +1,6 @@
 inherited ServiceCadastro: TServiceCadastro
   Height = 445
   Width = 923
-  inherited FDConn: TFDConnection
-    Connected = True
-  end
   object QRY_filial: TFDQuery
     Connection = FDConn
     SQL.Strings = (
@@ -173,6 +170,7 @@ inherited ServiceCadastro: TServiceCadastro
         Value = Null
       end>
     object QRY_vendaMOV_CODIGO: TIntegerField
+      AutoGenerateValue = arAutoInc
       FieldName = 'MOV_CODIGO'
       Origin = 'MOV_CODIGO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -227,6 +225,7 @@ inherited ServiceCadastro: TServiceCadastro
         Value = Null
       end>
     object QRY_vendaItemMVI_CODIGO: TIntegerField
+      AutoGenerateValue = arAutoInc
       FieldName = 'MVI_CODIGO'
       Origin = 'MVI_CODIGO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -289,6 +288,54 @@ inherited ServiceCadastro: TServiceCadastro
       FieldName = 'FOR_GERARECEBER'
       Origin = 'FOR_GERARECEBER'
       Size = 10
+    end
+  end
+  object QRY_cadCaixa: TFDQuery
+    Connection = FDConn
+    SQL.Strings = (
+      'select * from caixa where cai_codigo = :codigo')
+    Left = 376
+    Top = 256
+    ParamData = <
+      item
+        Name = 'CODIGO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object QRY_cadCaixaCAI_CODIGO: TIntegerField
+      AutoGenerateValue = arAutoInc
+      FieldName = 'CAI_CODIGO'
+      Origin = 'CAI_CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object QRY_cadCaixaCAI_DATAHORA: TSQLTimeStampField
+      FieldName = 'CAI_DATAHORA'
+      Origin = 'CAI_DATAHORA'
+    end
+    object QRY_cadCaixaCAI_TIPO: TStringField
+      FieldName = 'CAI_TIPO'
+      Origin = 'CAI_TIPO'
+      Size = 1
+    end
+    object QRY_cadCaixaCAI_VALOR: TFMTBCDField
+      FieldName = 'CAI_VALOR'
+      Origin = 'CAI_VALOR'
+      Precision = 18
+      Size = 2
+    end
+    object QRY_cadCaixaCAI_DESCRICAO: TStringField
+      FieldName = 'CAI_DESCRICAO'
+      Origin = 'CAI_DESCRICAO'
+      Size = 200
+    end
+    object QRY_cadCaixaCAI_IDFORMAPGTO: TIntegerField
+      FieldName = 'CAI_IDFORMAPGTO'
+      Origin = 'CAI_IDFORMAPGTO'
+    end
+    object QRY_cadCaixaCAI_IDVENDA: TIntegerField
+      FieldName = 'CAI_IDVENDA'
+      Origin = 'CAI_IDVENDA'
     end
   end
 end
