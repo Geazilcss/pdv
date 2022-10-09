@@ -4,7 +4,7 @@ object ViewPrincipal: TViewPrincipal
   Align = alClient
   BorderStyle = bsNone
   Caption = 'Principal'
-  ClientHeight = 768
+  ClientHeight = 764
   ClientWidth = 1024
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -2129,6 +2129,7 @@ object ViewPrincipal: TViewPrincipal
     FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
   KeyPreview = True
   OldCreateOrder = True
+  OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   PixelsPerInch = 96
@@ -2424,7 +2425,7 @@ object ViewPrincipal: TViewPrincipal
   end
   object pnlLinhaRodape: TPanel
     Left = 0
-    Top = 758
+    Top = 754
     Width = 1024
     Height = 10
     Align = alBottom
@@ -2436,7 +2437,7 @@ object ViewPrincipal: TViewPrincipal
   object pnlRodape: TPanel
     AlignWithMargins = True
     Left = 0
-    Top = 715
+    Top = 711
     Width = 1024
     Height = 41
     Margins.Left = 0
@@ -2449,11 +2450,15 @@ object ViewPrincipal: TViewPrincipal
     ParentBackground = False
     TabOrder = 2
     object lblAbreCaixa: TLabel
-      Left = 20
-      Top = 14
+      AlignWithMargins = True
+      Left = 10
+      Top = 15
       Width = 58
-      Height = 15
+      Height = 23
       Cursor = crHandPoint
+      Margins.Left = 10
+      Margins.Top = 15
+      Align = alLeft
       Caption = 'Abrir Caixa'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -2462,14 +2467,19 @@ object ViewPrincipal: TViewPrincipal
       Font.Style = []
       ParentFont = False
       OnClick = lblAbreCaixaClick
+      ExplicitHeight = 15
     end
     object lblFaturar: TLabel
-      Left = 132
-      Top = 14
-      Width = 40
-      Height = 15
+      AlignWithMargins = True
+      Left = 81
+      Top = 15
+      Width = 63
+      Height = 23
       Cursor = crHandPoint
-      Caption = 'Faturar '
+      Margins.Left = 10
+      Margins.Top = 15
+      Align = alLeft
+      Caption = 'Faturar  - F5'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -12
@@ -2477,13 +2487,14 @@ object ViewPrincipal: TViewPrincipal
       Font.Style = []
       ParentFont = False
       OnClick = lblFaturarClick
+      ExplicitHeight = 15
     end
   end
   object pnlBackground: TPanel
     Left = 0
     Top = 100
     Width = 1024
-    Height = 615
+    Height = 611
     Align = alClient
     BevelOuter = bvNone
     Color = 15461355
@@ -2494,7 +2505,7 @@ object ViewPrincipal: TViewPrincipal
       Left = 20
       Top = 20
       Width = 300
-      Height = 575
+      Height = 571
       Margins.Left = 20
       Margins.Top = 20
       Margins.Right = 20
@@ -2508,7 +2519,7 @@ object ViewPrincipal: TViewPrincipal
         Left = 0
         Top = 94
         Width = 300
-        Height = 226
+        Height = 222
         Align = alClient
         ExplicitLeft = 3
         ExplicitTop = 97
@@ -2580,7 +2591,7 @@ object ViewPrincipal: TViewPrincipal
       end
       object pnlRodapeConsultaProduto: TPanel
         Left = 0
-        Top = 500
+        Top = 496
         Width = 300
         Height = 75
         Align = alBottom
@@ -2633,7 +2644,7 @@ object ViewPrincipal: TViewPrincipal
       end
       object pnlNomeProduto: TPanel
         Left = 0
-        Top = 320
+        Top = 316
         Width = 300
         Height = 180
         Align = alBottom
@@ -2717,6 +2728,7 @@ object ViewPrincipal: TViewPrincipal
             Font.Height = -19
             Font.Name = 'Segoe UI Semibold'
             Font.Style = [fsBold]
+            NumbersOnly = True
             ParentFont = False
             TabOrder = 0
             Text = '1'
@@ -2745,7 +2757,7 @@ object ViewPrincipal: TViewPrincipal
       Left = 340
       Top = 20
       Width = 664
-      Height = 575
+      Height = 571
       Margins.Left = 0
       Margins.Top = 20
       Margins.Right = 20
@@ -2757,7 +2769,7 @@ object ViewPrincipal: TViewPrincipal
       TabOrder = 1
       object pnlTotalPagar: TPanel
         Left = 0
-        Top = 500
+        Top = 496
         Width = 664
         Height = 75
         Align = alBottom
@@ -2811,7 +2823,7 @@ object ViewPrincipal: TViewPrincipal
         Left = 10
         Top = 20
         Width = 644
-        Height = 477
+        Height = 473
         Margins.Left = 10
         Margins.Top = 20
         Margins.Right = 10
@@ -2829,6 +2841,7 @@ object ViewPrincipal: TViewPrincipal
         Font.Style = []
         Options = [dgTitles, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgTitleClick, dgTitleHotTrack]
         ParentFont = False
+        PopupMenu = PPM_itens
         TabOrder = 0
         TitleFont.Charset = ANSI_CHARSET
         TitleFont.Color = clWhite
@@ -2881,6 +2894,7 @@ object ViewPrincipal: TViewPrincipal
   end
   object TBL_itens: TFDMemTable
     AfterPost = TBL_itensAfterPost
+    AfterDelete = TBL_itensAfterDelete
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvSilentMode]
@@ -2921,5 +2935,13 @@ object ViewPrincipal: TViewPrincipal
     OnTimer = Timer_horaTimer
     Left = 428
     Top = 320
+  end
+  object PPM_itens: TPopupMenu
+    Left = 496
+    Top = 368
+    object Deletartem1: TMenuItem
+      Caption = 'Deletar '#205'tem'
+      OnClick = Deletartem1Click
+    end
   end
 end

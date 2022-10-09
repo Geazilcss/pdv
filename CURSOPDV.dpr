@@ -12,7 +12,8 @@ uses
   providers.functions in 'src\providers\providers.functions.pas',
   providers.variaveis in 'src\providers\providers.variaveis.pas',
   view.telaFundo in 'src\views\view.telaFundo.pas' {ViewTelaFundo},
-  view.formapgto in 'src\views\view.formapgto.pas' {ViewFormaPGTO};
+  view.formapgto in 'src\views\view.formapgto.pas' {ViewFormaPGTO},
+  providers.conversao in 'src\providers\providers.conversao.pas';
 
 {$R *.res}
 

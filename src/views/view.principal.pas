@@ -29,6 +29,7 @@ uses
   Vcl.Imaging.GIFImg,
   Vcl.Imaging.jpeg,
   Vcl.Imaging.pngimage,
+  Vcl.Menus,
   Vcl.Samples.Spin,
   Vcl.StdCtrls,
 
@@ -38,7 +39,9 @@ uses
   providers.functions,
 
   view.abrirCaixa,
-  view.base, view.formapgto, view.telaFundo;
+  view.base,
+  view.formapgto,
+  view.telaFundo;
 
 type
   TViewPrincipal = class(TViewBase)
@@ -93,6 +96,8 @@ type
     edtSubTotal: TEdit;
     Timer_hora: TTimer;
     lblFaturar: TLabel;
+    PPM_itens: TPopupMenu;
+    Deletartem1: TMenuItem;
     procedure imgLogoEmpresaBrancaMouseEnter(Sender: TObject);
     procedure imgLogoEmpresaAmarelaMouseLeave(Sender: TObject);
     procedure imgLogoEmpresaAmarelaClick(Sender: TObject);
@@ -106,10 +111,14 @@ type
     procedure dsItensDataChange(Sender: TObject; Field: TField);
     procedure Timer_horaTimer(Sender: TObject);
     procedure lblFaturarClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure Deletartem1Click(Sender: TObject);
+    procedure TBL_itensAfterDelete(DataSet: TDataSet);
   private
 
     var
       TOTAL_VENDA: double;
+    procedure Somar_Venda;
 
 
   public
@@ -136,6 +145,27 @@ procedure TViewPrincipal.FormResize(Sender: TObject);
 begin // Resize
   inherited;
   FService.DimensionarGrid( DBG_produtos );
+end;
+
+procedure TViewPrincipal.Deletartem1Click(Sender: TObject);
+begin //deletando item
+  inherited;
+  TBL_itens.Delete;
+  edtCodigoBarras.SetFocus;
+end;
+
+procedure TViewPrincipal.Somar_Venda;
+begin //somar venda
+  TOTAL_VENDA := 0;
+  TBL_itens.DisableControls;
+  TBL_itens.First;
+  while not TBL_itens.Eof do
+  begin
+    TOTAL_VENDA := TOTAL_VENDA + TBL_itensvlr_total.AsFloat;
+    TBL_itens.Next;
+  end;
+  TBL_itens.EnableControls;
+  edtTotalAPagar.Text := FloatToStr(TOTAL_VENDA);
 end;
 
 procedure TViewPrincipal.dsItensDataChange(Sender: TObject; Field: TField);
@@ -191,6 +221,14 @@ begin
   edtCodigoBarras.SetFocus;
 end;
 
+procedure TViewPrincipal.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  inherited;
+  if key = VK_F5 then
+    lblFaturarClick(lblFaturar);
+
+end;
+
 procedure TViewPrincipal.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
@@ -233,6 +271,11 @@ procedure TViewPrincipal.lblFaturarClick(Sender: TObject);
 begin // faturamento
   inherited;
 
+  //validação
+  if TBL_itens.RecordCount < 1 then
+    abort;
+
+
   ViewFormaPGTO := TViewFormaPGTO.Create(Self);
   try
 
@@ -243,6 +286,15 @@ begin // faturamento
     ViewTelaFundo.Show;
     ViewFormaPGTO.ShowModal;
 
+
+    if ViewFormaPGTO.ModalResult = mrOk then
+    begin
+      TBL_itens.EmptyDataSet;
+      edtSubTotal.Clear;
+      edtTotalAPagar.Clear;
+      edtCodigoBarras.SetFocus;
+    end;
+
   finally
     ViewTelaFundo.Hide;
     FreeAndNil(ViewFormaPGTO);
@@ -251,26 +303,16 @@ begin // faturamento
 
 end;
 
+procedure TViewPrincipal.TBL_itensAfterDelete(DataSet: TDataSet);
+begin
+  inherited;
+  Somar_Venda;
+end;
+
 procedure TViewPrincipal.TBL_itensAfterPost(DataSet: TDataSet);
 begin // somando
   inherited;
-
-  TOTAL_VENDA := 0;
-
-  TBL_itens.DisableControls;
-  TBL_itens.First;
-  while not TBL_itens.Eof do
-  begin
-
-    TOTAL_VENDA := TOTAL_VENDA + TBL_itensvlr_total.AsFloat;
-
-    TBL_itens.Next;
-  end;
-
-  TBL_itens.EnableControls;
-
-  edtTotalAPagar.Text := FloatToStr(TOTAL_VENDA);
-
+  Somar_Venda;
 end;
 
 procedure TViewPrincipal.Timer_horaTimer(Sender: TObject);

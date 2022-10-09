@@ -32,7 +32,9 @@ uses
   service.conexao,
 
   Vcl.DBGrids,
-  Vcl.Dialogs;
+  Vcl.Dialogs,
+
+  providers.conversao, frxClass, frxDBSet;
 
 type
   TServiceCadastro = class(TServiceConexao)
@@ -88,6 +90,26 @@ type
     QRY_cadCaixaCAI_DESCRICAO: TStringField;
     QRY_cadCaixaCAI_IDFORMAPGTO: TIntegerField;
     QRY_cadCaixaCAI_IDVENDA: TIntegerField;
+    QRY_receber1: TFDQuery;
+    QRY_receber2: TFDQuery;
+    QRY_receber1RC1_CODIGO: TIntegerField;
+    QRY_receber1RC1_NUMDOCTO: TStringField;
+    QRY_receber1RC1_CLIENTE: TIntegerField;
+    QRY_receber1RC1_VALOR: TFMTBCDField;
+    QRY_receber2RC2_CODIGO: TIntegerField;
+    QRY_receber2RC2_NUMDOCTO: TStringField;
+    QRY_receber2RC2_DATA: TDateField;
+    QRY_receber2RC2_VALORPARCELA: TFMTBCDField;
+    QRY_receber2RC2_PARCELA: TStringField;
+    QRY_receber2RC2_VENCIMENTO: TDateField;
+    QRY_receber2RC2_VALORHAVER: TFMTBCDField;
+    QRY_receber2RC2_VALORSALDO: TFMTBCDField;
+    frxReport: TfrxReport;
+    frxDBDataset_venda: TfrxDBDataset;
+    frxDBDataset_vendaItem: TfrxDBDataset;
+    frxDBDataset_filial: TfrxDBDataset;
+    QRY_vendaItemPR1_NOMECOMPLETO: TStringField;
+    procedure DataModuleCreate(Sender: TObject);
   private
 
 
@@ -100,6 +122,13 @@ type
 
     procedure PUT_venda(ADataSet: TDataSet; TipoEstoque, Vendedor, Cliente: integer;
       ValorVenda, Desconto: double);
+
+    procedure PUT_receber(ADocto: string; ID_CLIENTE: integer; ValorDocto: double);
+
+    procedure GET_ItemVenda(ANumVenda: integer);
+
+    var
+      NUM_VENDA: integer;
 
 
 
@@ -116,6 +145,15 @@ implementation
 {$R *.dfm}
 
 { TServiceCadastro }
+
+procedure TServiceCadastro.GET_ItemVenda(ANumVenda: integer);
+begin //pegando os itens da venda
+
+  QRY_vendaItem.Close;
+  QRY_vendaItem.Params[0].AsInteger := ANumVenda;
+  QRY_vendaItem.Open();
+
+end;
 
 procedure TServiceCadastro.GET_produtos(AValue: string);
 begin // produto pelo código de barras
@@ -149,6 +187,35 @@ begin   // gravando o caixa
 
 end;
 
+procedure TServiceCadastro.PUT_receber(ADocto: string; ID_CLIENTE: integer; ValorDocto: double);
+begin
+
+//salvando o cabeçalho do receber1
+  QRY_receber1.Close;
+  QRY_receber1.Open();
+  QRY_receber1.Insert;
+  QRY_receber1RC1_NUMDOCTO.AsString := ADocto;
+  QRY_receber1RC1_CLIENTE.AsInteger := ID_CLIENTE;
+  QRY_receber1RC1_VALOR.AsFloat     := ValorDocto;
+  QRY_receber1.Post;
+
+
+  //salvando o receber2 ( parcelas )
+  QRY_receber2.Close;
+  QRY_receber2.Open();
+  QRY_receber2.Insert;
+  QRY_receber2RC2_NUMDOCTO.AsString     := ADocto;
+  QRY_receber2RC2_DATA.AsDateTime       := Date;
+  QRY_receber2RC2_VALORPARCELA.AsFloat  := ValorDocto;
+  QRY_receber2RC2_PARCELA.AsString      := '1';
+  QRY_receber2RC2_VENCIMENTO.AsDateTime := Date + 30;
+  QRY_receber2RC2_VALORHAVER.AsFloat    := 0;
+  QRY_receber2RC2_VALORSALDO.AsFloat    := ValorDocto;
+  QRY_receber2.Post;
+
+
+end;
+
 procedure TServiceCadastro.PUT_venda(ADataSet: TDataSet; TipoEstoque, Vendedor, Cliente: integer;
       ValorVenda, Desconto: double);
 begin // inserindo a venda
@@ -157,7 +224,7 @@ begin // inserindo a venda
   QRY_venda.Close;
   QRY_venda.Open();
   QRY_venda.Insert;
-  QRY_vendaMOV_TIPOESTOQUE.AsInteger := 1;
+  QRY_vendaMOV_TIPOESTOQUE.AsInteger := EstoqueToStr(teVenda);
   QRY_vendaMOV_DATA.AsDateTime       := Date;
   QRY_vendaMOV_HORA.AsDateTime       := Time;
   QRY_vendaMOV_VLRDESCONTO.AsFloat   := Desconto;
@@ -184,6 +251,18 @@ begin // inserindo a venda
     ADataSet.Next;
   end;
 
+
+  NUM_VENDA := 0;
+  NUM_VENDA := QRY_vendaMOV_CODIGO.AsInteger;
+
+end;
+
+procedure TServiceCadastro.DataModuleCreate(Sender: TObject);
+begin
+  inherited;
+  QRY_filial.Close;
+  QRY_filial.Params[0].AsInteger := 1;
+  QRY_filial.Open();
 end;
 
 procedure TServiceCadastro.DimensionarGrid(dbg: TDBGrid);

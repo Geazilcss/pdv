@@ -147,6 +147,7 @@
             <Form>ViewFormaPGTO</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\providers\providers.conversao.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

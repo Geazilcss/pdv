@@ -142,31 +142,25 @@ begin   //salvar
   //salvando a venda
   FService.PUT_venda(TBL_itensVenda,1,1,1,FValorVenda,0);
 
-
-
   TBL_formasPGTO.First;
-
   while not TBL_formasPGTO.Eof do
   begin
 
     // gravando o caixa
-    FService.PUT_caixa('E', 'VENDA PDV N. ' + IntToStr(2) + ' - ' + TBL_formasPGTONOME_FORMAPGTO.AsString,
+    FService.PUT_caixa('E', 'VENDA PDV N. ' + IntToStr(FService.NUM_VENDA) + ' - ' + TBL_formasPGTONOME_FORMAPGTO.AsString,
                                  TBL_formasPGTOvalor_pgto.AsFloat,
                                  TBL_formasPGTOid_formapgto.AsInteger,
-                                 2 );
+                                 FService.NUM_VENDA );
 
     // gravando o receber
     if TBL_formasPGTOgerar_receber.AsString =  'S' then
     begin
 
-//      PUT_receber(TBL_formasPGTOid_numdocto.AsString,
-//                  TBL_formasPGTOid_cliente.AsInteger,
-//                  TBL_formasPGTOvalor_pgto.AsFloat);
+      FService.PUT_receber(IntToStr(FService.NUM_VENDA) + '-' + IntToStr(TBL_formasPGTOID_FORMAPGTO.AsInteger),
+                            TBL_formasPGTOID_CLIENTE.AsInteger,
+                            TBL_formasPGTOVALOR_PGTO.AsFloat);
 
     end;
-
-
-
 
 
     TBL_formasPGTO.Next;
@@ -174,9 +168,14 @@ begin   //salvar
   end;
 
 
-  ShowMessage('Dados salvos com sucesso.');
+//  ShowMessage('Dados salvos com sucesso.');
 
-  Self.Close;
+
+  FService.GET_ItemVenda(FService.NUM_VENDA);
+
+  FService.frxReport.ShowReport();
+
+  Self.ModalResult := mrOk;
 
 end;
 
